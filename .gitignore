@@ -1,3 +1,67 @@
-Pendejos
-los que lo lean
-putos todos
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data;
+
+namespace Nutrisionas
+{
+    class Cliente:MySqlDB
+    {
+
+        int id;
+        string nombre,apellidop,apellidop;
+        double edad, peso, altura = 0;
+        
+        
+
+        #region Propiedades
+
+        public int Folio
+        {
+            get { return id; }
+            set { id = value; }
+        }
+        public string Nombre
+        {
+            get { return nombre; }
+            set { nombre = value; }
+        }
+
+
+        #endregion
+
+        public void registrar()
+        {
+            string sql = "INSERT INTO cliente(nombre)VALUES('" + nombre + "')";
+            this.ejecutarAccion(sql);
+        }
+
+        public DataTable consultar()
+        {
+            string sql = "SELECT folio,nombre FROM cliente where status=1 ORDER BY nombre";
+            if (this.ejecutarConsulta(sql))
+            {
+                return datos;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        public DataTable consultar(string nColumna, string vColumna)
+        {
+            string sql = "SELECT * FROM cliente where " + nColumna + " LIKE '%" + vColumna + "%' ORDER BY NOMBRE";
+            if (this.ejecutarConsulta(sql))
+            {
+                return datos;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+    }
+}
